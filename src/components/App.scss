@@ -1,0 +1,23 @@
+// Component level variables
+$app-background: #ee862f;
+$calculator-background: #262626;
+
+.App {
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $app-background;
+
+    .calculator {
+        width: 300px;
+        background-color: $calculator-background;
+        border-radius: 30px;
+
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
