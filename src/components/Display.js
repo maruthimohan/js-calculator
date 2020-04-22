@@ -5,7 +5,8 @@ export default class Display extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            currentVal: '0',
+            currentExpression: ''
         };
     }
 
@@ -14,8 +15,8 @@ export default class Display extends React.Component {
             <div className="display-box">
                 {/* <div className="header">CALCULATOR</div> */}
                 <div className="display-content">
-                    <div className="formula">2 x 3 - 4 / 5</div>
-                    <div id="display" className="result">34235</div>
+                    <div className="formula">{this.state.currentExpression}</div>
+                    <div id="display" className="result">{this.state.currentVal}</div>
                 </div>
             </div>
         );

@@ -8,6 +8,7 @@ $calculator-background: #262626;
     height: 100%;
     width: 100%;
     background-color: $app-background;
+    font-weight: 300;
 
     .calculator {
         width: 300px;
@@ -18,7 +19,7 @@ $calculator-background: #262626;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        
+
         box-shadow: 0px 0px 5px rgba(0,0,0,0.4);
     }
 }
