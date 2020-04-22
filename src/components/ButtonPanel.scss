@@ -4,7 +4,7 @@ $button-shadow: #292929;
 $button-clear-color: #9c9c9c;
 $button-operator-color: #ee8a35;
 $button-number-color: #e9e9e9;
-$button-fonts: 'Quicksand', sans-serif;
+$button-fonts: 'Roboto', sans-serif;
 
 .button-panel {
     width: 300px;
@@ -38,11 +38,15 @@ $button-fonts: 'Quicksand', sans-serif;
         }
 
         &:active {
-            box-shadow: 0px 0px 1px rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.2);
         }
 
         &.clear {
-            color: $button-clear-color;
+            background-color: $button-clear-color;
+        }
+
+        &.clear-all {
+            background-color: rgb(195, 71, 71);
         }
 
         &.operator {

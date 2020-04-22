@@ -1,13 +1,12 @@
 // Component level variables
-$button-fonts: 'Quicksand', sans-serif;
+$button-fonts: 'Roboto', sans-serif;
 $button-operator-color: #ee8a35;
 $button-number-color: #e9e9e9;
 $button-clear-color: #9c9c9c;
 
-.display {
+.display-box {
     height: 200px;
     font-family: $button-fonts;
-    padding-top: 50px;
     position: relative;
     box-sizing: border-box;
 
@@ -20,21 +19,30 @@ $button-clear-color: #9c9c9c;
         transform: translateX(-50%);
     }
 
-    .formula {
-        position: relative;
-        color: $button-operator-color;
-        font-size: 22px;
-        text-align: right;
+    .display-content {
+        position: absolute;
         padding: 0 12px;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+
+        .formula {
+            position: relative;
+            color: $button-operator-color;
+            font-size: 22px;
+            text-align: right;
+        }
+    
+        .result {
+            position: relative;
+            font-size: 48px;
+            color: $button-clear-color;
+            word-wrap: normal;
+            text-align: right;
+            bottom: 0px;
+        }
     }
 
-    .result {
-        position: relative;
-        font-size: 48px;
-        color: $button-clear-color;
-        padding: 0 12px;
-        word-wrap: normal;
-        text-align: right;
-    }
+    
 }
 

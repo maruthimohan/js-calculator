@@ -11,10 +11,12 @@ export default class Display extends React.Component {
 
     render() {
         return (
-            <div className="display">
-                <div className="header">CALCULATOR</div>
-                <div className="formula">2 x 3 - 4 / 5</div>
-                <div className="result">34235</div>
+            <div className="display-box">
+                {/* <div className="header">CALCULATOR</div> */}
+                <div className="display-content">
+                    <div className="formula">2 x 3 - 4 / 5</div>
+                    <div id="display" className="result">34235</div>
+                </div>
             </div>
         );
     }
