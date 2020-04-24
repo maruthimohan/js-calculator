@@ -14,9 +14,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentVal: '0',
-            formula: '',
-            formulaArray: [],
+            currentValue: '0',
+            currentExpression: '',
             evaluated: false
         };
         // Handle the handler functions
@@ -25,35 +24,95 @@ class App extends React.Component {
         this.handleClear = this.handleClear.bind(this);
         this.handleDecimal = this.handleDecimal.bind(this);
         this.handleEquals = this.handleEquals.bind(this);
-        this.handleExpression = this.handleExpression.bind(this);
     }
 
     handleNumbers(e) {
         const currentNumber = e.target.value;
         // Add the number to the array
-        const currentValue = this.state.currentVal;
-        // Check if the current value is number
-        if(isNumber.test(currentValue) || isValidDecimal(currentValue)) {
-            this.handleExpression(currentNumber);
+        const currentVal = this.state.currentValue;
+        const expr = this.state.currentExpression;
+        // Initial state of calculator
+        if(expr === '' && currentVal === '0') {
+            this.setState({
+                currentExpression: expr + currentNumber,
+                currentValue: currentNumber
+            });
+        } else {
+            // Check if the current value is number
+            if(isNumber.test(currentVal) || isValidDecimal.test(currentVal)) {
+                this.setState({
+                    currentExpression: expr + currentNumber,
+                    currentValue: currentVal + currentNumber,
+                });
+            } else if(isOperator.test(currentVal)) {
+                this.setState({
+                    currentValue: currentNumber,
+                    currentExpression: expr + currentNumber
+                });
+            }
         }
     }
 
     handleOperators(e) {
-
+        // Handle +, -, *, /
+        const enteredOperator = e.target.value;
+        // Initial state do not
+        const expr = this.state.currentExpression;
+        const currVal = this.state.currentValue;
+        if(!(expr === '')) {
+            // if an operator was entered, check if it is the same
+            // if it is the same, do not do anything
+            // if it is not then replace the current value
+            if(isEndsWithOperatorWithMinus.test(expr)) {
+                let newExpr = expr.slice(0, -2);
+                this.setState({
+                    currentValue: enteredOperator,
+                    currentExpression: newExpr + enteredOperator
+                });
+            } else if(isEndsWithOperator.test(expr)) {
+                if(enteredOperator === '-') {
+                    if(currVal !== enteredOperator) {
+                        this.setState({
+                            currentValue: enteredOperator,
+                            currentExpression: expr + enteredOperator
+                        });
+                    }
+                } else {
+                    if(currVal !== enteredOperator) {
+                        let newExpr = expr.slice(0, -1);
+                        this.setState({
+                            currentValue: enteredOperator,
+                            currentExpression : newExpr + enteredOperator
+                        });
+                    }
+                }
+            } else {
+                // In none of the above cases,
+                // Just add the operator to the current expression
+                this.setState({
+                    currentValue: enteredOperator,
+                    currentExpression: expr + enteredOperator
+                });
+            }
+        }
     }
 
     handleClear(e) {
         // Clear all the values
         this.setState({
-            currentVal: '0',
-            formula: '',
-            formulaArray: [],
+            currentValue: '0',
+            currentExpression: '',
             evaluated: false
         })
     }
 
     handleEquals(e) {
-
+        //////// Evaluate the expression ///////////
+        // Things to take care of:
+        //  1. Expression might end with an operator
+        //  2. Expression might end with an operator and a minus sign
+        //  3. Equals might be pressed with an empty expression
+        
     }
 
     handleDecimal(e) {
@@ -61,13 +120,11 @@ class App extends React.Component {
     }
 
     handleExpression(currentValue) {
-        const formulaArr = this.state.formulaArray;
         const currVal = this.state.currentVal;
-        formulaArr.push(currentValue);
+        const expression = this.state.formula;
         // Set state
         this.setState({
-            formulaArray: formulaArr,
-            formula: formulaArr.join(''),
+            formula: expression,
             currentVal: currVal + currentValue,
         });
     }
@@ -76,7 +133,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <div className="calculator">
-                    <Display currentExpression={this.state.formula} displayValue={this.state.currentVal}/>
+                    <Display currentExpression={this.state.currentExpression} displayValue={this.state.currentValue}/>
                     <ButtonPanel 
                         handleNumber={this.handleNumbers}
                         handleOperator={this.handleOperators}

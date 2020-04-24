@@ -22,7 +22,7 @@ export default class ButtonPanel extends React.Component {
                 <button id="one" value="1" className="button number" onClick={this.props.handleNumber}>1</button>
                 <button id="two" value="2" className="button number" onClick={this.props.handleNumber}>2</button>
                 <button id="three" value="3" className="button number" onClick={this.props.handleNumber}>3</button>
-                <button id="multiply" value="x" className="button operator" onClick={this.props.handleOperator}>
+                <button id="multiply" value="*" className="button operator" onClick={this.props.handleOperator}>
                     x
                 </button>
 
