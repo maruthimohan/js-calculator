@@ -130,7 +130,6 @@ class App extends React.Component {
         const currVal = this.state.currentValue;
         const expr = this.state.currentExpression;
         if(this.state.evaluated) {
-            console.log('this.state.evaluated');
             let newVal = '0.'
             this.setState({
                 currentValue: newVal,
@@ -138,21 +137,18 @@ class App extends React.Component {
                 evaluated: false
             });
         } else if(expr === '') {
-            console.log('expr === ""');
             let newVal = '0.';
             this.setState({
                 currentValue: newVal,
                 currentExpression: newVal,
             })
         } else if(isOperator.test(currVal)) {
-            console.log('isOperator');
             let newVal = '0.';
             this.setState({
                 currentValue: newVal,
                 currentExpression: expr + newVal
             });
         } else if(currVal.indexOf('.') < 0){
-            console.log('currVal.indexOf(.) < 0');
             this.setState({
                 currentValue: currVal + '.',
                 currentExpression: expr + '.'
